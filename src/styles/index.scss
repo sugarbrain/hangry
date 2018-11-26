@@ -1,8 +1,8 @@
 
+@import 'reset';
 @import 'fonts';
+@import 'main';
+@import 'colors';
 
-#root {
-    background-image: url('../images/C-3PO.jpg');
-    font-family: Gotham;
-    color: white;
-}
+// Activities
+@import 'activities/splash';
