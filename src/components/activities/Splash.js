@@ -4,6 +4,7 @@ import Logo from '../../images/splash_logo.png';
 export default class Splash extends React.Component {
 
     componentDidMount() {
+        console.log(this.props.history)
         setTimeout(() => {
             this.props.history.push('/home')
         }, 1500);

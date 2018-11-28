@@ -1,0 +1,35 @@
+.footer {
+    font-size: .7rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    a {
+        text-decoration: none;
+    }
+
+    &__item {
+        color: $primary;
+        padding: 10px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        border-top: 4px solid white;
+
+        [data-icon] {
+            margin-bottom: 8px;
+            font-size: 1.6rem;
+        }
+
+        &.active {
+            border-top: 4px solid $primary;
+        }
+
+    }
+
+}

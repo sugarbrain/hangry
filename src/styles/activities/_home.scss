@@ -1,0 +1,33 @@
+.home {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+
+    &__header {
+        padding: 15px 10px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-items: center;
+
+        &-logo {
+            width: 22%;
+        }
+    }
+
+    &:after {
+        content: "";
+        background: #fe5722;
+        position: absolute;
+        z-index: -1;
+        width: 140%;
+        height: 20rem;
+        border-radius: 50%;
+        left: -18%;
+        top: 0;
+    }
+
+    &__content {
+        padding: 1.5rem;
+    }
+}
