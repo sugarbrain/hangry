@@ -1,0 +1,79 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*** Gotham **/
+@font-face {
+  font-family: Gotham;
+  font-weight: 300;
+  src: url(fonts/GothamLight-3f6969ada534de188f1956dd87359296.otf); }
+
+@font-face {
+  font-family: Gotham;
+  font-weight: 500;
+  src: url(fonts/GothamMedium-77171d8f5b5283f9d47a3434704bf944.ttf); }
+
+@font-face {
+  font-family: Gotham;
+  font-weight: 700;
+  src: url(fonts/GothamBold-14b3a355f612d6181e891efd2c798b5f.otf); }
+
+html, body, #root {
+  width: 100%;
+  height: 100%; }
+
+body {
+  font-family: Gotham;
+  font-weight: 500;
+  font-size: 14px; }
+
+.splash {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fe5722; }
+  .splash img {
+    width: 50%; }
+
+
+/*# sourceMappingURL=main.css.map*/
