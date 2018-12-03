@@ -1,0 +1,40 @@
+.restaurant-card {
+    margin: 2px;
+    margin-right: 12px;
+    width: 175px;
+    height: 230px;
+    box-shadow: 0px -1px 18px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    position: relative;
+    color: white;
+    background: white;
+    flex-shrink: 0;
+    
+    &__inner {
+        background: linear-gradient(transparent, rgba(0,0,0,.5));
+        position: absolute;
+        padding: 5px;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-end;
+    }
+
+    &__name {
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+    }
+
+    &__details {
+        font-size: .7rem;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    &__money {
+        color: green;
+    }
+
+
+}

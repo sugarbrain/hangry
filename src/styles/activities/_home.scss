@@ -4,10 +4,10 @@
     overflow: hidden;
 
     &__header {
-        padding: 15px 10px;
+        padding: 15px 18px;
         display: flex;
         flex-flow: row nowrap;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
 
         &-logo {
@@ -28,6 +28,28 @@
     }
 
     &__content {
-        padding: 1.5rem;
+        .padded {
+            padding: 1.2rem;
+        }
+    }
+
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    &__restaurants {
+        padding: 0 1.2rem; 
+        display: flex;
+        flex-flow: row nowrap;
+        overflow-x: scroll;
+
+        .restaurant-card__outer:last-child {
+            padding-right: 1.2rem;
+        }
+    }
+
+    &__more-ordered {
+        margin-top: 2rem;
     }
 }
