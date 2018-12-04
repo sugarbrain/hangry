@@ -7,12 +7,15 @@ import '../styles/index.scss';
 class App extends Component {
   render() {
     return (
-      <HashRouter>
-        <Switch>
-          <Route exact={true} path="/" component={Splash} />
-          <Route path="/home" component={Home} />
-        </Switch>
-      </HashRouter>
+      <>
+        <meta name="theme-color" content="#fe5722"></meta>
+        <HashRouter>
+          <Switch>
+            <Route exact={true} path="/" component={Splash} />
+            <Route path="/home" component={Home} />
+          </Switch>
+        </HashRouter>
+      </>
     );
   }
 }
