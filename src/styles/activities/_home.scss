@@ -2,6 +2,7 @@
     position: relative;
     min-height: 100%;
     overflow: hidden;
+    padding: 4rem 0 2rem 0;
 
     &__header {
         padding: 15px 18px;
@@ -27,16 +28,20 @@
         top: 0;
     }
 
-    &__content {
+    &__section {
+        margin-top: .2rem;
+
         .padded {
             padding: 1.2rem;
         }
+        
     }
 
 
     h1 {
         font-size: 2rem;
     }
+
 
     &__restaurants {
         padding: 0 1.2rem; 
@@ -45,11 +50,21 @@
         overflow-x: scroll;
 
         .restaurant-card__outer:last-child {
-            padding-right: 1.2rem;
+            padding-right: 0.5rem;
+        }
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+         
+         
+        &::-webkit-scrollbar-thumb {
+            width: 0;
         }
     }
 
-    &__more-ordered {
-        margin-top: 2rem;
+    &__rest-list-view {
+        display: flex;
+        flex-flow: column nowrap;
     }
 }
