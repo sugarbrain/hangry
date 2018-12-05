@@ -16,14 +16,19 @@ export default class Home extends Component {
     this.state = {
       restaurants: [],
       categories: [ {
+          id: 1,
           name: 'comida brasileira'
         }, {
+          id: 2,
           name: 'pizza'
         }, {
+          id: 3,
           name: 'japonesa'
         }, {
+          id: 4,
           name: 'fast-food'
         }, {
+          id: 5,
           name: 'mexicana'
         }
       ]
@@ -33,48 +38,54 @@ export default class Home extends Component {
   componentDidMount() {
     axios.get('https://hangry-api.herokuapp.com/restaurant')
          .then((data) => {
-           console.log(data);
-           this.setState(prevState => ({
-              restaurants: [ ...data.data ],
-            }));
-         });
+            console.log(data);
+            this.props.setStore({
+              data: {
+                spottedRestaurants: [ ...data.data ],
+                moreOrderedRestaurants: [ ...data.data ]
+              }
+            })
+    });
   }
   render() {
     return (
-      <div className="home">
+      <div className="activity home">
         <Header>
-          <div className="home__header">
+          <div className="activity__header">
             <HeaderItem>
               <FontAwesomeIcon icon={faBars} />
             </HeaderItem>
-            <img className="home__header-logo" src={Logo} />
+            <img className="activity__header-logo" src={Logo} />
             <HeaderItem>
               <FontAwesomeIcon icon={faSearch} />
             </HeaderItem>
           </div>
         </Header>
 
-        <div className="home__section">
+        <div className="activity__section">
           <h1 className="padded" style={ { color: "#fff" } }>em destaque</h1>
           <div className="home__restaurants">
             {
-              this.state.restaurants.map(restaurant => {
-                return <RestaurantCard name={ restaurant.name } 
+              this.props.store.data.spottedRestaurants.map(restaurant => {
+                return <RestaurantCard key={restaurant._id}
+                                       id={restaurant._id}
+                                       name={ restaurant.name } 
                                        category={ restaurant.category} 
-                                       url={ restaurant.imageURL } 
-                                       distance="2km" 
+                                       url={ restaurant.image_url } 
+                                       distance={ restaurant.distance }
                                        money="$$" />
               })
             }
           </div>
         </div>
 
-        <div className="home__section ">
+        <div className="activity__section ">
           <h1 className="padded">mais pedidos</h1>
           <div className="home__rest-list-view padded-x">
             {
-              this.state.restaurants.map(restaurant => {
-                return <RestaurantListView name={ restaurant.name } 
+              this.props.store.data.moreOrderedRestaurants.map(restaurant => {
+                return <RestaurantListView key={restaurant._id}
+                                       name={ restaurant.name } 
                                        category={ restaurant.category } 
                                        url={ restaurant.imageURL } 
                                        distance="2km" 
@@ -84,12 +95,12 @@ export default class Home extends Component {
           </div>
         </div>
 
-        <div className="home__section">
+        <div className="activity__section">
           <h1 className="padded">categorias</h1>
           <div className="home__category-list padded-x">
             {
               this.state.categories.map(category => {
-                return <CategoryCard name={ category.name } />
+                return <CategoryCard key={category.id} name={category.name} />
               })
             }
           </div>
