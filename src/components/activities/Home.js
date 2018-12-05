@@ -6,6 +6,7 @@ import Logo from '../../images/splash_logo.png';
 import HeaderItem from '../HeaderItem.js';
 import RestaurantCard from '../RestaurantCard.js';
 import RestaurantListView from '../RestaurantListView.js';
+import CategoryCard from '../CategoryCard.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,12 +14,24 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurants: []
+      restaurants: [],
+      categories: [ {
+          name: 'comida brasileira'
+        }, {
+          name: 'pizza'
+        }, {
+          name: 'japonesa'
+        }, {
+          name: 'fast-food'
+        }, {
+          name: 'mexicana'
+        }
+      ]
     }
   }
 
   componentDidMount() {
-    axios.get('http://hangry-api.herokuapp.com/restaurant')
+    axios.get('https://hangry-api.herokuapp.com/restaurant')
          .then((data) => {
            console.log(data);
            this.setState(prevState => ({
@@ -58,7 +71,7 @@ export default class Home extends Component {
 
         <div className="home__section ">
           <h1 className="padded">mais pedidos</h1>
-          <div className="home__rest-list-view padded">
+          <div className="home__rest-list-view padded-x">
             {
               this.state.restaurants.map(restaurant => {
                 return <RestaurantListView name={ restaurant.name } 
@@ -66,6 +79,17 @@ export default class Home extends Component {
                                        url={ restaurant.imageURL } 
                                        distance="2km" 
                                        money="$$" />
+              })
+            }
+          </div>
+        </div>
+
+        <div className="home__section">
+          <h1 className="padded">categorias</h1>
+          <div className="home__category-list padded-x">
+            {
+              this.state.categories.map(category => {
+                return <CategoryCard name={ category.name } />
               })
             }
           </div>

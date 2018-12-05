@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeaderItem = (props) => {
+const HeaderItem = props => {
     return (
         <div className="header-item">
             { props.children }

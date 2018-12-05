@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-export default class Home extends Component {
-  render() {
-    return (
+const RestaurantListView = props => {
+    return ( 
         <div className="rest-list">
-            <div className="rest-list__image" style={ { backgroundImage: `url(${ this.props.url})`}}>
+            <div className="rest-list__image" style={ { backgroundImage: `url(${ props.url})`}}>
             </div>
+
             <div className="rest-list__info">
                 <div className="rest-list__name">
-                    { this.props.name }
+                    { props.name }
                 </div>
                 <div className="rest-list__data">
-                    { this.props.category + " • " + this.props.distance }
+                    { props.category + " • " + props.distance }
                 </div>
             </div>
         
@@ -22,5 +22,6 @@ export default class Home extends Component {
             </div>  
         </div>
     );
-  }
 }
+
+export default RestaurantListView;
