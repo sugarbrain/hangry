@@ -235,7 +235,7 @@ export default class Restaurant extends Component {
 
         {
 
-          this.state.order.meals.length > 0 ?
+          this.state.order.meals.length > 0 && this.state.order.from !== "" && this.state.order.to !== ""?
             <OrderBar totalPrice={(this.state.order.total_price * this.state.order.multiplier).toFixed(2)} />
             : <Footer p={this.props.history} />
         }
