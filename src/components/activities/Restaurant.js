@@ -85,15 +85,17 @@ export default class Restaurant extends Component {
       let total_price = this.state.order.total_price + Number(price);
       let meals = this.state.order.meals;
       meals.push(mealId);
-
+      let from = this.state.order.from;
+      let to = this.state.order.to;
+      let multiplier = this.state.order.multiplier;
       this.setState({
         ...this.state,
         order: {
           meals,
           total_price,
-          from: this.state.from,
-          to: this.state.to,
-          multiplier: this.state.multiplier
+          from,
+          to,
+          multiplier
         }
       });
     } else {
@@ -102,14 +104,18 @@ export default class Restaurant extends Component {
       meals.splice(index,1);
 
       let total_price = this.state.order.total_price - Number(price);
+
+      let from = this.state.order.from;
+      let to = this.state.order.to;
+      let multiplier = this.state.order.multiplier;
       this.setState({
         ...this.state,
         order: {
           meals,
           total_price,
-          from: this.state.from,
-          to: this.state.to,
-          multiplier: this.state.multiplier
+          from,
+          to,
+          multiplier
         }
       });
 
@@ -120,10 +126,13 @@ export default class Restaurant extends Component {
 
   addCheckoutToOrder(from, to, multiplier, alreadyInOrder) {
     if(!alreadyInOrder) {
+      let meals = this.state.order.meals;
+      let total_price = this.state.order.total_price;
       this.setState({
+        ...this.state,
         order: {
-          meals: this.state.meals,
-          total_price: this.state.order.total_price,
+          meals,
+          total_price,
           from,
           to,
           multiplier
@@ -227,7 +236,7 @@ export default class Restaurant extends Component {
         {
 
           this.state.order.meals.length > 0 ?
-            <OrderBar totalPrice={this.state.order.total_price * this.state.order.multiplier} />
+            <OrderBar totalPrice={(this.state.order.total_price * this.state.order.multiplier).toFixed(2)} />
             : <Footer p={this.props.history} />
         }
       </div>
