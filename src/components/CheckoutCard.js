@@ -6,13 +6,13 @@ const CheckoutCard = props => {
     return (
         <div className="checkout-card" onClick={() => this.props.handleClick(props.slot) }>
             <div className="checkout-card__hour">
-                { props.time.from }
+                { props.slot.from }
             </div>
             <div className="text">
                 às
             </div>
             <div className="checkout-card__hour">
-                { props.time.to }
+                { props.slot.to }
             </div>
         </div>
     );
