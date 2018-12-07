@@ -19,4 +19,8 @@
         font-size: 1.2rem;
     }
 
+    &[active=true] {
+        border: 2px solid $primary;
+    }
+
 }

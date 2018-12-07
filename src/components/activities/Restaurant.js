@@ -24,22 +24,27 @@ export default class Restaurant extends Component {
       meals: [],
       order: {
         meals: [],
-        total_price: 0
+        total_price: 0,
+        from: "",
+        to: "",
+        multiplier: 1,
       },
       checkout_slot: [
-        { from: '11:00', to: '11:30', multiplier: 0.8 },
-        { from: '11:30', to: '12:00', multiplier: 0.9 },
-        { from: '12:30', to: '13:00', multiplier: 1.1 },
-        { from: '13:00', to: '13:30', multiplier: 1.1 },
-        { from: '13:30', to: '14:00', multiplier: 0.9 },
-        { from: '14:00', to: '14:30', multiplier: 0.8 },
-        { from: '14:00', to: '14:30', multiplier: 0.8 },
-        { from: '14:30', to: '15:00', multiplier: 0.8 },
+        { id: 1, from: '10:00', to: '10:30', multiplier: 0.8 },
+        { id: 2, from: '10:30', to: '11:00', multiplier: 0.8 },
+        { id: 3, from: '11:00', to: '11:30', multiplier: 0.9 },
+        { id: 4, from: '11:30', to: '12:00', multiplier: 1.2 },
+        { id: 5, from: '12:30', to: '13:00', multiplier: 1.2 },
+        { id: 6, from: '13:00', to: '13:30', multiplier: 1.1 },
+        { id: 7, from: '13:30', to: '14:00', multiplier: 0.9 },
+        { id: 8, from: '14:00', to: '14:30', multiplier: 0.8 },
+        { id: 9, from: '14:30', to: '15:00', multiplier: 0.8 },
       ]
     }
 
     this.onClickBack = this.onClickBack.bind(this);
     this.addMealToOrder = this.addMealToOrder.bind(this);
+    this.addCheckoutToOrder = this.addCheckoutToOrder.bind(this);
   }
 
   componentDidMount() {
@@ -85,7 +90,10 @@ export default class Restaurant extends Component {
         ...this.state,
         order: {
           meals,
-          total_price
+          total_price,
+          from: this.state.from,
+          to: this.state.to,
+          multiplier: this.state.multiplier
         }
       });
     } else {
@@ -94,12 +102,14 @@ export default class Restaurant extends Component {
       meals.splice(index,1);
 
       let total_price = this.state.order.total_price - Number(price);
-
       this.setState({
         ...this.state,
         order: {
           meals,
-          total_price
+          total_price,
+          from: this.state.from,
+          to: this.state.to,
+          multiplier: this.state.multiplier
         }
       });
 
@@ -107,6 +117,21 @@ export default class Restaurant extends Component {
     console.log(this.state);
   }
 
+
+  addCheckoutToOrder(from, to, multiplier, alreadyInOrder) {
+    if(!alreadyInOrder) {
+      this.setState({
+        order: {
+          meals: this.state.meals,
+          total_price: this.state.order.total_price,
+          from,
+          to,
+          multiplier
+        }
+      });
+    }
+    console.log(this.state);
+  }
   
   
   render() {
@@ -133,15 +158,21 @@ export default class Restaurant extends Component {
             </div>
         </div>
 
-        <div className="activity__section">
-          <h2 className="padded" >horário de retirada</h2>
-          
-          <div className="restaurant__checkout">
-            {
-              this.state.checkout_slot.map(slot => <CheckoutCard slot={ slot } />) 
-            }
-          </div>
-        </div>
+          <div className="activity__section">
+            <h2 className="padded" >horário de retirada</h2>
+            
+            <div className="restaurant__checkout">
+              {
+                this.state.checkout_slot.map(slot => <CheckoutCard key = {slot.id}
+                                                                  from = {slot.from}
+                                                                  to = {slot.to}
+                                                                  multiplier = {slot.multiplier}
+                                                                  active={this.state.order.from === slot.from && this.state.order.to == slot.to} 
+                                                                  addCheckoutToOrder={(from, to, multiplier, active) => this.addCheckoutToOrder(from, to, multiplier, active)}
+                                                    />) 
+              }
+              </div>
+            </div>
 
         <div className="activity__section">
           
@@ -196,7 +227,7 @@ export default class Restaurant extends Component {
         {
 
           this.state.order.meals.length > 0 ?
-            <OrderBar totalPrice={this.state.order.total_price} />
+            <OrderBar totalPrice={this.state.order.total_price * this.state.order.multiplier} />
             : <Footer p={this.props.history} />
         }
       </div>
