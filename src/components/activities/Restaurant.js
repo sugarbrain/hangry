@@ -5,7 +5,8 @@ import Footer from '../Footer.js';
 import Logo from '../../images/splash_logo.png';
 import HeaderItem from '../HeaderItem.js';
 import  MealListView from '../MealListView.js';
-import CategoryCard from '../CategoryCard.js';
+import OrderBar from '../OrderBar.js';
+import CheckoutCard from '../CheckoutCard.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,10 +21,25 @@ export default class Restaurant extends Component {
           image_url: "",
           phone: "",
       },
-      meals: []
+      meals: [],
+      order: {
+        meals: [],
+        total_price: 0
+      },
+      checkout_slot: [
+        { from: '11:00', to: '11:30', multiplier: 0.8 },
+        { from: '11:30', to: '12:00', multiplier: 0.9 },
+        { from: '12:30', to: '13:00', multiplier: 1.1 },
+        { from: '13:00', to: '13:30', multiplier: 1.1 },
+        { from: '13:30', to: '14:00', multiplier: 0.9 },
+        { from: '14:00', to: '14:30', multiplier: 0.8 },
+        { from: '14:00', to: '14:30', multiplier: 0.8 },
+        { from: '14:30', to: '15:00', multiplier: 0.8 },
+      ]
     }
 
     this.onClickBack = this.onClickBack.bind(this);
+    this.addMealToOrder = this.addMealToOrder.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +50,11 @@ export default class Restaurant extends Component {
     .then(data => {
         console.log(data);
         this.setState(prevState => ({
-            model: data.data
+            model: data.data,
+            order: {
+              ...prevState.order,
+              restaurant_id: data.data._id
+            }
         }));
     }).catch(err => {
         console.log(err);
@@ -54,6 +74,40 @@ export default class Restaurant extends Component {
   onClickBack() {
     window.history.back();
   }
+
+  addMealToOrder(mealId, price, alreadyInOrder) {
+    if(!alreadyInOrder) {
+      let total_price = this.state.order.total_price + Number(price);
+      let meals = this.state.order.meals;
+      meals.push(mealId);
+
+      this.setState({
+        ...this.state,
+        order: {
+          meals,
+          total_price
+        }
+      });
+    } else {
+      const index = this.state.order.meals.indexOf(mealId);
+      let meals = this.state.order.meals;
+      meals.splice(index,1);
+
+      let total_price = this.state.order.total_price - Number(price);
+
+      this.setState({
+        ...this.state,
+        order: {
+          meals,
+          total_price
+        }
+      });
+
+    }
+    console.log(this.state);
+  }
+
+  
   
   render() {
     return (
@@ -69,7 +123,7 @@ export default class Restaurant extends Component {
             </HeaderItem>
           </div>
         </Header>
-        
+
         <div className="restaurant__box" style={ { backgroundImage: `url(${  this.state.model.image_url })`} }>
             <div className="name">
                 { this.state.model.name }
@@ -80,24 +134,71 @@ export default class Restaurant extends Component {
         </div>
 
         <div className="activity__section">
+          <h2 className="padded" >horário de retirada</h2>
+          
+          <div className="restaurant__checkout">
+            {
+              this.state.checkout_slot.map(slot => <CheckoutCard slot={ slot } />) 
+            }
+          </div>
+        </div>
+
+        <div className="activity__section">
           
           <h2 className="padded" >pratos</h2>
           
           <div className="restaurant__meals padded-x">
             {
                 this.state.meals.map(meal => {
-                    return <MealListView key={meal.id}
-                                         id={meal.id}
-                                         name={meal.name} 
-                                         description={meal.description} 
-                                         price={meal.price} 
-                                         url={meal.image_url} />
+                  if(meal.type === 'meal') {
+                    return <MealListView key={meal._id}
+                                        id={meal._id}
+                                        name={meal.name} 
+                                        description={meal.description} 
+                                        price={meal.price} 
+                                        url={meal.image_url}
+                                        active={this.state.order.meals.includes(meal._id)} 
+                                        addMealToOrder={(mealId, price, active) => this.addMealToOrder(mealId, price, active)}
+                                        />
+                  }
                 })
             }
           </div>
+
+          
         </div>
 
-        <Footer p={this.props.history} />
+        <div className="activity__section">
+          
+          <h2 className="padded" >adicionais</h2>
+          
+          <div className="restaurant__meals padded-x">
+            {
+                this.state.meals.map(meal => {
+                  if(meal.type === 'extra') {
+                    return <MealListView key={meal._id}
+                                        id={meal._id}
+                                        name={meal.name} 
+                                        description={meal.description} 
+                                        price={meal.price} 
+                                        url={meal.image_url}
+                                        active={this.state.order.meals.includes(meal._id)} 
+                                        addMealToOrder={(mealId, price, active) => this.addMealToOrder(mealId, price, active)}
+                                        />
+                  }
+                })
+            }
+          </div>
+
+          
+        </div>
+
+        {
+
+          this.state.order.meals.length > 0 ?
+            <OrderBar totalPrice={this.state.order.total_price} />
+            : <Footer p={this.props.history} />
+        }
       </div>
     );
   }

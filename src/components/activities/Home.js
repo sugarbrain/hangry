@@ -14,7 +14,6 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurants: [],
       categories: [ {
           id: 1,
           name: 'comida brasileira'
@@ -41,8 +40,7 @@ export default class Home extends Component {
             console.log(data);
             this.props.setStore({
               data: {
-                spottedRestaurants: [ ...data.data ],
-                moreOrderedRestaurants: [ ...data.data ]
+                restaurants: [ ...data.data ]
               }
             })
     });
@@ -63,10 +61,10 @@ export default class Home extends Component {
         </Header>
 
         <div className="activity__section">
-          <h1 className="padded" style={ { color: "#fff" } }>em destaque</h1>
+          <h1 className="padded" style={ { color: "#fff" } }>perto de você</h1>
           <div className="home__restaurants">
             {
-              this.props.store.data.spottedRestaurants.map(restaurant => {
+              this.props.store.data.restaurants.map(restaurant => {
                 return <RestaurantCard key={restaurant._id}
                                        id={restaurant._id}
                                        name={ restaurant.name } 
@@ -80,14 +78,15 @@ export default class Home extends Component {
         </div>
 
         <div className="activity__section ">
-          <h1 className="padded">mais pedidos</h1>
+          <h1 className="padded">restaurantes</h1>
           <div className="home__rest-list-view padded-x">
             {
-              this.props.store.data.moreOrderedRestaurants.map(restaurant => {
+              this.props.store.data.restaurants.map(restaurant => {
                 return <RestaurantListView key={restaurant._id}
+                                       id={restaurant._id}
                                        name={ restaurant.name } 
                                        category={ restaurant.category } 
-                                       url={ restaurant.imageURL } 
+                                       url={ restaurant.image_url } 
                                        distance="2km" 
                                        money="$$" />
               })

@@ -2,7 +2,7 @@
 
     &__box {
         width: 100%;
-        height: 40%;
+        height: 300px;
         background: $primary;
         background-size: cover;
         background-position: center;
@@ -47,5 +47,25 @@
     &__meals {
         display: flex;
         flex-flow: column nowrap;
+    }
+
+    &__checkout {
+        padding: 0 1.2rem; 
+        display: flex;
+        flex-flow: row nowrap;
+        overflow-x: scroll;
+
+        .checkout-card:last-child {
+            padding-right: 10px;
+        }
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+         
+         
+        &::-webkit-scrollbar-thumb {
+            width: 0;
+        }
     }
 }

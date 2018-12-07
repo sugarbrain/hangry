@@ -13,8 +13,9 @@ class App extends Component {
       isSideMenuVisible: false,
       userName: 'Dado Dolabella',
       data: {
-        spottedRestaurants: [],
-        moreOrderedRestaurants: []
+        closeToYou: [],
+        allRestaurants: [],
+        restaurants: []
       }
     }
 

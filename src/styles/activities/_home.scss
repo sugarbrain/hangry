@@ -35,6 +35,11 @@
     &__rest-list-view {
         display: flex;
         flex-flow: column nowrap;
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
     }
 
     &__category-list {

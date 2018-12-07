@@ -1,0 +1,22 @@
+.checkout-card {
+    
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    border-radius: 11px;
+    padding: 8px 10px;
+    text-align: center;
+    background: #ccc;
+    color: white;
+
+    margin-right: 10px;
+
+    .text {
+        font-size: .8rem;
+        margin: 2px 0;
+    }
+    &__hour {
+        font-size: 1.2rem;
+    }
+
+}
