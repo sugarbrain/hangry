@@ -7,7 +7,7 @@ const OrderBar = props => {
         <div className="order-bar">
             <div className="order-bar__total">
                 <div className="title">total</div>
-                <div className="total-price">{ 'R$' + (props.totalPrice / 100) || 'R$1.024,00' }</div>
+                <div className="total-price">{ 'R$' + (props.totalPrice / 100).toFixed(2) || 'R$1.024,00' }</div>
             </div>
 
             <div className="order-bar__button">
