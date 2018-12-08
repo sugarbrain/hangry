@@ -1,15 +1,16 @@
 .checkout-card {
-    
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     border-radius: 11px;
     padding: 8px 10px;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     color: black;
 
-    margin-right: 10px;
+    &__outer {
+        padding-right: 10px;
+    }
 
     .text {
         font-size: .8rem;
@@ -20,7 +21,7 @@
     }
 
     &[active=true] {
-        border: 2px solid $primary;
+        border: 5px solid $primary !important;
     }
 
 }

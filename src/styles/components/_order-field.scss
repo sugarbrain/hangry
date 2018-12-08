@@ -1,0 +1,16 @@
+.order-field {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: .5rem 0;
+
+    &__name {
+        color: #ccc;
+        font-size: .9rem;
+        font-weight: bolder;
+        margin-bottom: 8px;
+    }
+
+    &__value {
+        font-size: 1rem;
+    }
+}

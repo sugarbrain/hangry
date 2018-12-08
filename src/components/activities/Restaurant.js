@@ -30,15 +30,15 @@ export default class Restaurant extends Component {
         multiplier: 1,
       },
       checkout_slot: [
-        { id: 1, from: '10:00', to: '10:30', multiplier: 0.8 },
-        { id: 2, from: '10:30', to: '11:00', multiplier: 0.8 },
-        { id: 3, from: '11:00', to: '11:30', multiplier: 0.9 },
-        { id: 4, from: '11:30', to: '12:00', multiplier: 1.2 },
-        { id: 5, from: '12:30', to: '13:00', multiplier: 1.2 },
+        { id: 1, from: '10:00', to: '10:30', multiplier: 0.95 },
+        { id: 2, from: '10:30', to: '11:00', multiplier: 0.95 },
+        { id: 3, from: '11:00', to: '11:30', multiplier: 0.95 },
+        { id: 4, from: '11:30', to: '12:00', multiplier: 1.1 },
+        { id: 5, from: '12:30', to: '13:00', multiplier: 1.15 },
         { id: 6, from: '13:00', to: '13:30', multiplier: 1.1 },
-        { id: 7, from: '13:30', to: '14:00', multiplier: 0.9 },
-        { id: 8, from: '14:00', to: '14:30', multiplier: 0.8 },
-        { id: 9, from: '14:30', to: '15:00', multiplier: 0.8 },
+        { id: 7, from: '13:30', to: '14:00', multiplier: 0.95 },
+        { id: 8, from: '14:00', to: '14:30', multiplier: 0.95 },
+        { id: 9, from: '14:30', to: '15:00', multiplier: 0.95 },
       ]
     }
 
@@ -142,6 +142,18 @@ export default class Restaurant extends Component {
     console.log(this.state);
   }
   
+  continueOrder() {
+    this.props.setStore({
+      ...this.props.store,
+      data: {
+        ...this.props.store.data,
+        order: this.state.order
+      }
+    });
+
+    this.props.history.push('/order-details');  
+    console.log(this.props.store);
+  }
   
   render() {
     return (
@@ -236,7 +248,8 @@ export default class Restaurant extends Component {
         {
 
           this.state.order.meals.length > 0 && this.state.order.from !== "" && this.state.order.to !== ""?
-            <OrderBar totalPrice={this.state.order.total_price * this.state.order.multiplier} />
+            <OrderBar totalPrice={this.state.order.total_price * this.state.order.multiplier} 
+                      continue={() => this.continueOrder() }/>
             : <Footer p={this.props.history} />
         }
       </div>

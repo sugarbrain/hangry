@@ -11,7 +11,7 @@ const OrderBar = props => {
             </div>
 
             <div className="order-bar__button">
-                <button>continuar <FontAwesomeIcon icon={faAngleRight} /></button>
+                <button onClick={() => props.continue()}>continuar <FontAwesomeIcon icon={faAngleRight} /></button>
             </div>
         </div>
     );

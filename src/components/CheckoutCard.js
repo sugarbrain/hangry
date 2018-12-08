@@ -7,6 +7,7 @@ export default class CheckoutCard extends React.Component {
         super(props);
 
         this.handleClick = this.handleClick.bind(this);
+        this.borderColor = this.color.bind(this);
     }
 
     handleClick() {
@@ -14,17 +15,38 @@ export default class CheckoutCard extends React.Component {
         console.log("clickOrder")
     }
 
+    color() {
+        switch(this.props.multiplier) {
+            case 0.95:
+                return '#4caf50';
+            case 1.1:
+                return '#FF9800';
+            case 1.15:
+                return '#ff5500';
+            default:
+                return '#7faf4c';
+        }
+    }    
+
     render(){
         return (
-            <div className="checkout-card" active={this.props.active.toString()} onClick={() => this.handleClick()}>
-                <div className="checkout-card__hour">
-                    {this.props.from }
-                </div>
-                <div className="text">
-                    às
-                </div>
-                <div className="checkout-card__hour">
-                    {this.props.to}
+            <div className="checkout-card__outer">
+                <div className="checkout-card" active={this.props.active.toString()} 
+                                               onClick={() => this.handleClick()}
+                                               style={{
+                                                   borderColor: this.color()
+                                               }}
+                                               >
+
+                    <div className="checkout-card__hour">
+                        {this.props.from }
+                    </div>
+                    <div className="text">
+                        às
+                    </div>
+                    <div className="checkout-card__hour">
+                        {this.props.to}
+                    </div>
                 </div>
             </div>
         );

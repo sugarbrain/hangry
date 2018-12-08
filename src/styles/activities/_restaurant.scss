@@ -55,8 +55,8 @@
         flex-flow: row nowrap;
         overflow-x: scroll;
 
-        .checkout-card:last-child {
-            padding-right: 10px;
+        .checkout-card__outer:last-child {
+            padding-right: 1.2rem;
         }
 
         &::-webkit-scrollbar {

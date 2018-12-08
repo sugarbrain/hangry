@@ -4,6 +4,7 @@ import { HashRouter, Switch, Route, FadeIn } from 'react-router-dom';
 import Splash from './activities/Splash';
 import HomeActivity from './activities/Home';
 import RestaurantActivity from './activities/Restaurant';
+import OrderDetailsActivity from './activities/OrderDetails';
 import '../styles/index.scss';
 
 class App extends Component {
@@ -15,7 +16,14 @@ class App extends Component {
       data: {
         closeToYou: [],
         allRestaurants: [],
-        restaurants: []
+        restaurants: [],
+        order: {
+          meals: [],
+          total_price: 0,
+          from: "",
+          to: "",
+          multiplier: 1,
+        }
       }
     }
 
@@ -38,6 +46,9 @@ class App extends Component {
             />
             <Route path="/restaurant/:id" render={ 
               props => <RestaurantActivity store={this.state} setStore={s => this.setStore(s)} {...props} />} 
+            />
+            <Route path="/order-details" render={ 
+              props => <OrderDetailsActivity store={this.state} setStore={s => this.setStore(s)} {...props} />} 
             />
           </Switch>
         </HashRouter>

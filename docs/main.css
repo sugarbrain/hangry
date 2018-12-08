@@ -289,16 +289,29 @@ body {
   border-radius: 11px;
   padding: 8px 10px;
   text-align: center;
-  border: 1px solid #ccc;
-  color: black;
-  margin-right: 10px; }
+  border: 3px solid #ccc;
+  color: black; }
+  .checkout-card__outer {
+    padding-right: 10px; }
   .checkout-card .text {
     font-size: .8rem;
     margin: 2px 0; }
   .checkout-card__hour {
     font-size: 1.2rem; }
   .checkout-card[active=true] {
-    border: 2px solid #fe5722; }
+    border: 5px solid #fe5722 !important; }
+
+.order-field {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: .5rem 0; }
+  .order-field__name {
+    color: #ccc;
+    font-size: .9rem;
+    font-weight: bolder;
+    margin-bottom: 8px; }
+  .order-field__value {
+    font-size: 1rem; }
 
 .splash {
   width: 100%;
@@ -390,8 +403,8 @@ body {
   display: flex;
   flex-flow: row nowrap;
   overflow-x: scroll; }
-  .restaurant__checkout .checkout-card:last-child {
-    padding-right: 10px; }
+  .restaurant__checkout .checkout-card__outer:last-child {
+    padding-right: 1.2rem; }
   .restaurant__checkout::-webkit-scrollbar {
     width: 0; }
   .restaurant__checkout::-webkit-scrollbar-thumb {
