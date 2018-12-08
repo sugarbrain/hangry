@@ -16,17 +16,18 @@ export default class CheckoutCard extends React.Component {
     }
 
     color() {
-        switch(this.props.multiplier) {
-            case 0.95:
-                return '#4caf50';
-            case 1.1:
-                return '#FF9800';
-            case 1.15:
-                return '#ff5500';
-            default:
-                return '#7faf4c';
+        if (this.props.multiplier >= 1.15) {
+            return '#ff5500';
         }
-    }    
+        else if (this.props.multiplier >= 1.1){
+            return '#FF9800';
+        }
+        else if (this.props.multiplier >= 0.95){
+            return '#4caf50';            
+        } else{
+            return '#7faf4c';
+        }
+    }  
 
     render(){
         return (
