@@ -248,7 +248,8 @@ export default class Restaurant extends Component {
         {
 
           this.state.order.meals.length > 0 && this.state.order.from !== "" && this.state.order.to !== ""?
-            <OrderBar totalPrice={this.state.order.total_price * this.state.order.multiplier} 
+            <OrderBar percentageRatio={this.state.order.multiplier}
+                      totalPrice={this.state.order.total_price * this.state.order.multiplier} 
                       continue={() => this.continueOrder() }/>
             : <Footer p={this.props.history} />
         }

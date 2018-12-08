@@ -269,6 +269,9 @@ body {
       text-transform: uppercase;
       margin-bottom: 3px;
       font-size: .8rem; }
+    .order-bar__total .percentage-ratio {
+      font-size: .65rem;
+      color: #000; }
     .order-bar__total .total-price {
       font-size: 1.4rem;
       color: #12b312; }
