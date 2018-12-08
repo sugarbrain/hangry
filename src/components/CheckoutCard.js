@@ -34,7 +34,8 @@ export default class CheckoutCard extends React.Component {
                 <div className="checkout-card" active={this.props.active.toString()} 
                                                onClick={() => this.handleClick()}
                                                style={{
-                                                   borderColor: this.color()
+                                                    borderBottomColor: this.color(),
+                                                    borderBottomWidth: 3
                                                }}
                                                >
 
