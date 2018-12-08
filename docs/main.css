@@ -246,7 +246,7 @@ body {
     color: #12b312;
     font-size: 1rem; }
   .meal-list[active=true] {
-    border: 1px solid #fe5722; }
+    border: 2px solid #fe5722; }
 
 .order-bar {
   display: flex;
@@ -302,7 +302,7 @@ body {
   .checkout-card__hour {
     font-size: 1.2rem; }
   .checkout-card[active=true] {
-    border: 1px solid #fe5722 !important; }
+    border: 2px solid #fe5722 !important; }
 
 .order-field {
   display: flex;
