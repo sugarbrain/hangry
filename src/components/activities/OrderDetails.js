@@ -8,7 +8,7 @@ import OrderField from '../OrderField.js';
 import MealListView from '../MealListView.js';
 import PaymentBox from '../PaymentBox.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faAngleLeft, faMarsStrokeH } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 export default class Home extends Component {
@@ -170,9 +170,9 @@ export default class Home extends Component {
             }/>
             {
               this.props.store.data.order.multiplier > 1?
-              <OrderField name="taxa de aumento" value={((this.props.store.data.order.multiplier)*100)-100 + "%"}/>:
+              <OrderField name="taxa de aumento" value={Math.round(((this.props.store.data.order.multiplier)*100)-100) + "%"}/>:
               this.props.store.data.order.multiplier < 1?
-              <OrderField name="taxa de desconto" value={100-((this.props.store.data.order.multiplier)*100) + "%"}/>:
+              <OrderField name="taxa de desconto" value={Math.round(100-((this.props.store.data.order.multiplier)*100)) + "%"}/>:
               <div></div>
             }
             <OrderField name="valor total" value={'R$ '+ ((this.props.store.data.order.total_price*this.props.store.data.order.multiplier)/100).toFixed(2)}/>
