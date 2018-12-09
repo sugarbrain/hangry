@@ -85,7 +85,7 @@ export default class OrderListView extends React.Component {
                     </div>
                     <div className="order-list__details">
                         <div className="order-list__name">
-                                { (this.props.id).substr(0,6) }
+                                { (this.props.id).substr(a.length-5) }
                         </div>
                         {
                                 this.props.multiplier < 1?
