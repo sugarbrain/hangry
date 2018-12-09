@@ -14,10 +14,7 @@ class App extends Component {
     super(props);
     this.state = {
       isSideMenuVisible: false,
-      userName: 'Dado Dolabella',
       data: {
-        closeToYou: [],
-        allRestaurants: [],
         restaurants: [],
         order: {
           meals: [],
@@ -25,6 +22,7 @@ class App extends Component {
           from: "",
           to: "",
           multiplier: 1,
+          restaurant_id: ""
         }
       }
     }

@@ -5,7 +5,7 @@ import Footer from '../Footer.js';
 import Logo from '../../images/splash_logo.png';
 import HeaderItem from '../HeaderItem.js';
 import OrderField from '../OrderField.js';
-import RestaurantListView from '../RestaurantListView.js';
+import MealListView from '../MealListView.js';
 import CategoryCard from '../CategoryCard.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
@@ -17,34 +17,46 @@ export default class Home extends Component {
       order: {
         meals: [],
         restaurant: {},
-
       }
     }
+    this.addMealToOrder.bind(this);
   }
 
   componentDidMount() {
     console.log(this.props.store);
-    // meals
     this.props.store.data.order.meals.forEach(m => {
       axios.get(`https://hangry-api.herokuapp.com/meal/${m}`).then(data => {
-        this.setState(prevState => ({
-          ...this.state.order,
-          meals: [
-            ...this.state.order.meals,
-            data.data
-          ]
-        }))
+        let meals = this.state.order.meals;
+        let restaurant = this.state.order.restaurant;
+        meals.push(data.data);
+        this.setState({
+          ...this.state,
+          order: {
+            meals,
+            restaurant
+          }
+        });
       });
-    });
+    })
 
     // restaurant
     const restaurantId = this.props.store.data.order.restaurant_id;
     axios.get(`https://hangry-api.herokuapp.com/restaurant/${restaurantId}`).then(data => {
-      this.setState(prevState => ({
-        ...this.state.order,
-        restaurant: data.data
-        }));
+      let meals = this.state.order.meals;
+      let restaurant = data.data;
+      this.setState({
+          ...this.state,
+          order: {
+            meals,
+            restaurant
+          }
+        });
     });
+
+    console.log(this.state);
+  }
+
+  addMealToOrder(mealId, price, active){
   }
 
   onClickBack() {
@@ -74,38 +86,49 @@ export default class Home extends Component {
             <OrderField name="hora de retirada" value={
               `Hoje, de ${this.props.store.data.order.from} às ${this.props.store.data.order.to}`
             } />
+            <OrderField name="pratos" value=
             {
               this.state.order.meals.map(meal => {
+                if(meal.type === 'meal') {
                 return <MealListView key={meal._id}
                                         id={meal._id}
                                         name={meal.name} 
                                         description={meal.description} 
                                         price={meal.price} 
                                         url={meal.image_url}
+                                        active={false}
+                                        addMealToOrder={(mealId, price, active) => this.addMealToOrder(mealId, price, active)}
                                         />
-              })
-            }
+              }})
+            }/>
+            <OrderField name="adicionais" value=
+            {
+              this.state.order.meals.map(meal => {
+                if(meal.type === 'extra') {
+                return <MealListView key={meal._id}
+                                        id={meal._id}
+                                        name={meal.name} 
+                                        description={meal.description} 
+                                        price={meal.price} 
+                                        url={meal.image_url}
+                                        active={false}
+                                        addMealToOrder={(mealId, price, active) => this.addMealToOrder(mealId, price, active)}
+                                        />
+              }})
+            }/>
+            <OrderField name="valor total" value={'R$ ' + (this.props.store.data.order.total_price/100) + ' x ' 
+                                          + (this.props.store.data.order.multiplier) + ' = R$ ' 
+                                          + ((this.props.store.data.order.total_price*this.props.store.data.order.multiplier)/100).toFixed(2)}/>
           </div>
         </div>
 
         <div className="activity__section">
-          <h2 className="padded">pagamento</h2>
+          <h1 className="padded">pagamento</h1>
           <div className="order-details__payment padded">
             {
-              
             }
           </div>
         </div>
-
-        <div className="activity__section">
-          <h1 className="padded">resumo</h1>
-          <div className="order-details__payment padded">
-            {
-              
-            }
-          </div>
-        </div>
-
         <Footer p={this.props.history} />
       </div>
     );

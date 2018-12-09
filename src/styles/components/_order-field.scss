@@ -4,13 +4,16 @@
     margin: .5rem 0;
 
     &__name {
-        color: #ccc;
+        color: #000;
         font-size: .9rem;
-        font-weight: bolder;
+        font-weight: lighter;
         margin-bottom: 8px;
     }
 
     &__value {
         font-size: 1rem;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        font-weight: lighter;
     }
 }

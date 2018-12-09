@@ -4,7 +4,7 @@ import Header from '../Header.js';
 import Footer from '../Footer.js';
 import Logo from '../../images/splash_logo.png';
 import HeaderItem from '../HeaderItem.js';
-import  MealListView from '../MealListView.js';
+import MealListView from '../MealListView.js';
 import OrderBar from '../OrderBar.js';
 import CheckoutCard from '../CheckoutCard.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,6 +28,7 @@ export default class Restaurant extends Component {
         from: "",
         to: "",
         multiplier: 1,
+        restaurant_id: ""
       },
       checkout_slot: [
         { id: 1, from: '10:00', to: '10:30', multiplier: 0.95 },
@@ -88,6 +89,7 @@ export default class Restaurant extends Component {
       let from = this.state.order.from;
       let to = this.state.order.to;
       let multiplier = this.state.order.multiplier;
+      let restaurant_id = this.state.order.restaurant_id;
       this.setState({
         ...this.state,
         order: {
@@ -95,7 +97,8 @@ export default class Restaurant extends Component {
           total_price,
           from,
           to,
-          multiplier
+          multiplier,
+          restaurant_id
         }
       });
     } else {
@@ -108,6 +111,7 @@ export default class Restaurant extends Component {
       let from = this.state.order.from;
       let to = this.state.order.to;
       let multiplier = this.state.order.multiplier;
+      let restaurant_id = this.state.order.restaurant_id;
       this.setState({
         ...this.state,
         order: {
@@ -115,7 +119,8 @@ export default class Restaurant extends Component {
           total_price,
           from,
           to,
-          multiplier
+          multiplier,
+          restaurant_id
         }
       });
 
@@ -128,6 +133,7 @@ export default class Restaurant extends Component {
     if(!alreadyInOrder) {
       let meals = this.state.order.meals;
       let total_price = this.state.order.total_price;
+      let restaurant_id = this.state.order.restaurant_id;
       this.setState({
         ...this.state,
         order: {
@@ -135,7 +141,8 @@ export default class Restaurant extends Component {
           total_price,
           from,
           to,
-          multiplier
+          multiplier,
+          restaurant_id
         }
       });
     }
