@@ -32,14 +32,11 @@ export default class PaymentBox extends React.Component {
                     </div>
                     <div className="order-list__angle">
                             {
-                                this.props.active?
+                                this.props.active == 'true'?
                                 <FontAwesomeIcon icon={faAngleUp} />:<FontAwesomeIcon icon={faAngleDown} />
                             }
                     </div>
                     <div className="payment-box__content" active={this.props.active}>
-                            {
-                                "Oi"
-                            }
                     </div>
                 </div>
             </div>

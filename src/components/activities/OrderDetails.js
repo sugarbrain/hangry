@@ -29,8 +29,8 @@ export default class Home extends Component {
 	  postSent: false
     }
     this.createOrder.bind(this);
-    this.addMealToOrder.bind(this);
     this.addPaymentToCollapse.bind(this);
+    this.dummy.bind(this);
   }
 
   componentDidMount() {
@@ -68,33 +68,31 @@ export default class Home extends Component {
   }
   
   createOrder(data){
-	  if(!this.state.postSent){
-		  fetch('https://hangry-api.herokuapp.com/order/', {
-			  method: 'POST',
-			  headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-			  },
-			  body: JSON.stringify({
-				restaurant_id: data.restaurant_id,
+    if(!this.state.postSent){
+    let req = {
+      url: `https://hangry-api.herokuapp.com/order/`,
+      method: 'POST',
+      data: {
+        restaurant_id: data.restaurant_id,
 				meals: data.meals,
 				from_timestamp: data.from,
 				to_timestamp: data.to,
 				total_price: data.total_price,
 				multiplier: data.multiplier,
 				status: "Pedido",
-			  })
-		})
-		this.setState({ postSent: true });
-	  }
+      }
+    }
+    axios(req);}
+    this.setState({
+      ...this.state,
+      postSent: true });
   }
 
-
-  addMealToOrder(mealId, price, active){
+  dummy(){
   }
 
   addPaymentToCollapse(payment, alreadyCollapse) {
-    if(!alreadyCollapse){
+    if(alreadyCollapse == "false"){
       let payments = this.state.payments_collapsed;
       payments.push(payment)
       this.setState({
@@ -151,7 +149,7 @@ export default class Home extends Component {
                                         price={meal.price} 
                                         url={meal.image_url}
                                         active={false}
-                                        addMealToOrder={(mealId, price, active) => this.addMealToOrder(mealId, price, active)}
+                                        addMealToOrder={(mealId, price, active) => this.dummy()}
                                         />
               }})
             }/>
@@ -166,7 +164,7 @@ export default class Home extends Component {
                                         price={meal.price} 
                                         url={meal.image_url}
                                         active={false.toString()}
-                                        addMealToOrder={(mealId, price, active) => this.addMealToOrder(mealId, price, active)}
+                                        addMealToOrder={(mealId, price, active) => this.dummy()}
                                         />
               }})
             }/>
@@ -190,7 +188,7 @@ export default class Home extends Component {
                                 name={payment.name}
                                 description={payment.description}
                                 options={payment.options}
-                                active={this.state.payments_collapsed.includes(payment.name)}
+                                active={this.state.payments_collapsed.includes(payment.name).toString()}
                                 addPaymentToCollapse={(payment, active) => this.addPaymentToCollapse(payment, active)}/>
             })
           }
