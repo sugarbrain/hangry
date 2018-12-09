@@ -13,25 +13,7 @@ import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      categories: [ {
-          id: 1,
-          name: 'comida brasileira'
-        }, {
-          id: 2,
-          name: 'pizza'
-        }, {
-          id: 3,
-          name: 'japonesa'
-        }, {
-          id: 4,
-          name: 'fast-food'
-        }, {
-          id: 5,
-          name: 'mexicana'
-        }
-      ]
-    }
+    this.state = {}
   }
 
   componentDidMount() {
@@ -93,18 +75,6 @@ export default class Home extends Component {
             }
           </div>
         </div>
-
-        <div className="activity__section">
-          <h1 className="padded">categorias</h1>
-          <div className="home__category-list padded-x">
-            {
-              this.state.categories.map(category => {
-                return <CategoryCard key={category.id} name={category.name} />
-              })
-            }
-          </div>
-        </div>
-
         <Footer p={this.props.history} />
       </div>
     );

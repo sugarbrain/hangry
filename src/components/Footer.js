@@ -9,7 +9,6 @@ export default class Footer extends Component {
     return (
         <div className="footer">
             <FooterItem to="/home" icon={faHome} title="Home" path={this.props.p} />
-            <FooterItem to="/cart" icon={faShoppingCart} title="Carrinho" path={this.props.p} />
             <FooterItem to="/orders" icon={faFileAlt} title="Pedidos" path={this.props.p} />
             <FooterItem to="/profile" icon={faUser} title="Eu" path={this.props.p} />
         </div>     
