@@ -7,6 +7,7 @@ import HeaderItem from '../HeaderItem.js';
 import OrderField from '../OrderField.js';
 import MealListView from '../MealListView.js';
 import PaymentBox from '../PaymentBox.js';
+import OrderBar from '../OrderBar.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faAngleLeft, faMarsStrokeH } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -27,6 +28,7 @@ export default class Home extends Component {
       ],
 	  postSent: false
     }
+    this.createOrder.bind(this);
     this.addMealToOrder.bind(this);
     this.addPaymentToCollapse.bind(this);
   }
@@ -194,10 +196,13 @@ export default class Home extends Component {
           }
           </div>
         </div>
-		<div className="order-bar__button">
-		  <button onClick={this.createOrder.bind(this, this.props.store.data.order)} disabled={this.state.postSent}>confirmar <FontAwesomeIcon icon={faAngleRight} /></button>
-        </div>
-        <Footer p={this.props.history} />
+        {
+          true?
+          <OrderBar totalPrice={this.props.store.data.order.total_price * this.props.store.data.order.multiplier}
+                    text={"finalizar"}
+                    continue={(data) => this.createOrder(this.props.store.data.order)} />:
+          <Footer p={this.props.history} />
+        }
       </div>
     );
   }
