@@ -67,7 +67,7 @@ export default class Home extends Component {
   
   createOrder(data){
 	  if(!this.state.postSent){
-		  fetch('https://hangry-api-mmps.c9users.io/order/', {
+		  fetch('https://hangry-api.herokuapp.com/order/', {
 			  method: 'POST',
 			  headers: {
 				'Accept': 'application/json',
