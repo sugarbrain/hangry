@@ -96,11 +96,18 @@ export default class Home extends Component {
 				from_timestamp: data.from,
 				to_timestamp: data.to,
 				total_price: data.total_price,
-				multiplier: data.multiplier,
+        multiplier: data.multiplier,
 				status: "Pedido",
       }
     }
-    axios(req);
+    axios(req).then(data => {
+      let sessions = this.props.store.sessions;
+      sessions.push(data.data.ops[0].session);
+      this.props.setStore({
+        ...this.props.store,
+        sessions
+      })
+    });
     this.props.history.push('/order-finish');
   }
 

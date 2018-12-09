@@ -8,7 +8,7 @@ export default class OrderFinish extends React.Component {
         console.log(this.props.history)
         setTimeout(() => {
             this.props.history.push('/home')
-        }, 1500);
+        }, 2500);
     }
 
     render() {

@@ -24,8 +24,9 @@ class App extends Component {
           to: "",
           multiplier: 1,
           restaurant_id: ""
-        }
-      }
+        },
+      },
+      sessions: []
     }
 
     this.setStore = this.setStore.bind(this);
