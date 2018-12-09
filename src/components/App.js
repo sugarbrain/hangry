@@ -5,6 +5,7 @@ import Splash from './activities/Splash';
 import HomeActivity from './activities/Home';
 import RestaurantActivity from './activities/Restaurant';
 import OrderDetailsActivity from './activities/OrderDetails';
+import OrderFinish from './activities/OrderFinish';
 import OrdersActivity from './activities/Orders';
 import ProfileActivity from './activities/Profile';
 import '../styles/index.scss';
@@ -56,6 +57,7 @@ class App extends Component {
             <Route path="/order-details" render={ 
               props => <OrderDetailsActivity store={this.state} setStore={s => this.setStore(s)} {...props} />} 
             />
+            <Route exact={true} path="/order-finish" render={ props =>  <OrderFinish {...props} /> } />
           </Switch>
         </HashRouter>
       </>

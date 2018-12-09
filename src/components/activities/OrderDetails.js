@@ -26,7 +26,6 @@ export default class Home extends Component {
         {id: 2, name: "Vale alimentação", description: "Pague sua conta no própio estabelecimento", options: ['Sodexo']},
         {id: 3, name: "Vale refeição", description: "Pague sua conta no próprio estabelecimento", options: ['Alelo']}
       ],
-	  postSent: false
     }
     this.createOrder.bind(this);
     this.addPaymentToCollapse.bind(this);
@@ -68,7 +67,6 @@ export default class Home extends Component {
   }
   
   createOrder(data){
-    if(!this.state.postSent){
     let req = {
       url: `https://hangry-api.herokuapp.com/order/`,
       method: 'POST',
@@ -82,10 +80,8 @@ export default class Home extends Component {
 				status: "Pedido",
       }
     }
-    axios(req);}
-    this.setState({
-      ...this.state,
-      postSent: true });
+    axios(req);
+    this.props.history.push('/order-finish');
   }
 
   dummy(){
