@@ -9,6 +9,7 @@ import MealListView from '../MealListView.js';
 import PaymentBox from '../PaymentBox.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 export default class Home extends Component {
   constructor(props) {
@@ -23,7 +24,8 @@ export default class Home extends Component {
         {id: 1, name: "Dinheiro", description: "Pague sua conta no próprio estabelecimento", options: ['Sim', 'Não']}, 
         {id: 2, name: "Vale alimentação", description: "Pague sua conta no própio estabelecimento", options: ['Sodexo']},
         {id: 3, name: "Vale refeição", description: "Pague sua conta no próprio estabelecimento", options: ['Alelo']}
-      ]
+      ],
+	  postSent: false
     }
     this.addMealToOrder.bind(this);
     this.addPaymentToCollapse.bind(this);
@@ -62,6 +64,29 @@ export default class Home extends Component {
 
     console.log(this.state);
   }
+  
+  createOrder(data){
+	  if(!this.state.postSent){
+		  fetch('https://hangry-api-mmps.c9users.io/order/', {
+			  method: 'POST',
+			  headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			  },
+			  body: JSON.stringify({
+				restaurant_id: data.restaurant_id,
+				meals: data.meals,
+				from_timestamp: data.from,
+				to_timestamp: data.to,
+				total_price: data.total_price,
+				multiplier: data.multiplier,
+				status: "Pedido",
+			  })
+		})
+		this.setState({ postSent: true });
+	  }
+  }
+
 
   addMealToOrder(mealId, price, active){
   }
@@ -168,6 +193,9 @@ export default class Home extends Component {
             })
           }
           </div>
+        </div>
+		<div className="order-bar__button">
+		  <button onClick={this.createOrder.bind(this, this.props.store.data.order)} disabled={this.state.postSent}>confirmar <FontAwesomeIcon icon={faAngleRight} /></button>
         </div>
         <Footer p={this.props.history} />
       </div>
