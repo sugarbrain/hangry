@@ -20,15 +20,35 @@ export default class Home extends Component {
         meals: [],
         restaurant: {},
       },
+      payment_selected: "",
       payments_collapsed: [],
       payments_method: [
-        {id: 1, name: "Dinheiro", description: "Pague sua conta no próprio estabelecimento", options: ['Sim', 'Não']}, 
-        {id: 2, name: "Vale alimentação", description: "Pague sua conta no própio estabelecimento", options: ['Sodexo']},
-        {id: 3, name: "Vale refeição", description: "Pague sua conta no próprio estabelecimento", options: ['Alelo']}
+        {id: 1, 
+          name: "Local", 
+          description: "Pague sua conta quando for buscar sua comida", 
+          question: {
+            text: "1. Qual será a forma de pagamento?", 
+            options: [
+              {
+                id: 1, 
+                value: 'Dinheiro'
+              },
+              {
+                id: 2, 
+                value: 'Vale refeição'
+              },
+              {
+                id: 3,
+                value: 'Vale alimentação'
+              }
+            ]
+          }
+        }
       ],
     }
     this.createOrder.bind(this);
     this.addPaymentToCollapse.bind(this);
+    this.addPayment.bind(this);
     this.dummy.bind(this);
   }
 
@@ -107,6 +127,15 @@ export default class Home extends Component {
     console.log(this.state);
   }  
 
+  addPayment(value){
+    let payment_selected = value;
+    this.setState({
+      ...this.state,
+      payment_selected
+    });
+    console.log(this.state);
+  }
+
   onClickBack() {
     window.history.back();
   }
@@ -183,15 +212,16 @@ export default class Home extends Component {
               return <PaymentBox key={payment.id} 
                                 name={payment.name}
                                 description={payment.description}
-                                options={payment.options}
+                                question={payment.question}
                                 active={this.state.payments_collapsed.includes(payment.name).toString()}
-                                addPaymentToCollapse={(payment, active) => this.addPaymentToCollapse(payment, active)}/>
+                                addPaymentToCollapse={(payment, active) => this.addPaymentToCollapse(payment, active)}
+                                addPayment={(value) => this.addPayment(value)}/>
             })
           }
           </div>
         </div>
         {
-          true?
+          this.state.payment_selected !== ""?
           <OrderBar totalPrice={this.props.store.data.order.total_price * this.props.store.data.order.multiplier}
                     text={"finalizar"}
                     continue={(data) => this.createOrder(this.props.store.data.order)} />:

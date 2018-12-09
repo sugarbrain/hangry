@@ -47,4 +47,21 @@
     &__content[active=true] {
         display: inline;
     }
+
+    form{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        font-weight: lighter;
+    }
+
+    label{
+        margin-top: 10px;
+    }
+
+    &__question{
+        font-weight: lighter;
+    }
+
+
 }

@@ -352,6 +352,15 @@ body {
     display: none; }
   .payment-box__content[active=true] {
     display: inline; }
+  .payment-box form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    font-weight: lighter; }
+  .payment-box label {
+    margin-top: 10px; }
+  .payment-box__question {
+    font-weight: lighter; }
 
 .splash {
   width: 100%;

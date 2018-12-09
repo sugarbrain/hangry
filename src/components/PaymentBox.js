@@ -10,10 +10,15 @@ export default class PaymentBox extends React.Component {
         this.state = {
         }
         this.addPaymentToCollapse = this.addPaymentToCollapse.bind(this);
+        this.addPayment = this.addPayment.bind(this);
     }
 
     addPaymentToCollapse() {
         this.props.addPaymentToCollapse(this.props.name, this.props.active);
+    }
+
+    addPayment(value){
+        this.props.addPayment(value);
     }
 
     render(){
@@ -36,8 +41,18 @@ export default class PaymentBox extends React.Component {
                                 <FontAwesomeIcon icon={faAngleUp} />:<FontAwesomeIcon icon={faAngleDown} />
                             }
                     </div>
-                    <div className="payment-box__content" active={this.props.active}>
-                    </div>
+                </div>
+                <div className="payment-box__content" active={this.props.active}>
+                        <form>
+                            <div>{this.props.question.text}</div>
+                            {
+                                this.props.question.options.map(option => {
+                                                return <label key={option.id}>
+                                                        <input type="radio" name="payment" value={option.value} onClick={() => this.addPayment(option.value)} />
+                                                        {option.value}
+                                                        </label>})
+                            }
+                        </form>
                 </div>
             </div>
         );
