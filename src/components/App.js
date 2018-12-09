@@ -5,6 +5,8 @@ import Splash from './activities/Splash';
 import HomeActivity from './activities/Home';
 import RestaurantActivity from './activities/Restaurant';
 import OrderDetailsActivity from './activities/OrderDetails';
+import OrdersActivity from './activities/Orders';
+import ProfileActivity from './activities/Profile';
 import '../styles/index.scss';
 
 class App extends Component {
@@ -43,6 +45,12 @@ class App extends Component {
             <Route exact={true} path="/" render={ props =>  <Splash {...props} /> } />
             <Route path="/home" render={ 
               props => <HomeActivity store={this.state} store={this.state} setStore={s => this.setStore(s)} {...props} />} 
+            />
+            <Route path="/orders" render={ 
+              props => <OrdersActivity store={this.state} store={this.state} setStore={s => this.setStore(s)} {...props} />} 
+            />
+            <Route path="/profile" render={ 
+              props => <ProfileActivity store={this.state} store={this.state} setStore={s => this.setStore(s)} {...props} />} 
             />
             <Route path="/restaurant/:id" render={ 
               props => <RestaurantActivity store={this.state} setStore={s => this.setStore(s)} {...props} />} 
