@@ -8,6 +8,7 @@ import OrderField from '../OrderField.js';
 import MealListView from '../MealListView.js';
 import PaymentBox from '../PaymentBox.js';
 import OrderBar from '../OrderBar.js';
+import OrderItems from '../OrderItems.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faAngleLeft, faMarsStrokeH } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -39,7 +40,11 @@ export default class Home extends Component {
               },
               {
                 id: 3,
-                value: 'Vale alimentação'
+                value: 'Cartão de Débito'
+              },
+              {
+                id: 4,
+                value: 'Cartão de Crédito'
               }
             ]
           }
@@ -170,50 +175,19 @@ export default class Home extends Component {
             <OrderField name="hora de retirada" value={
               `Hoje, de ${this.props.store.data.order.from} às ${this.props.store.data.order.to}`
             } />
-            <OrderField name="pratos" value=
+            <OrderField name="itens" value=
             {
-              this.state.order.meals.map(meal => {
-                if(meal.type === 'meal') {
-                return <MealListView key={meal._id}
-                                        id={meal._id}
-                                        name={meal.name} 
-                                        description={meal.description} 
-                                        price={meal.price} 
-                                        url={meal.image_url}
-                                        active={false}
-                                        addMealToOrder={(mealId, price, active) => this.dummy()}
-                                        />
-              }})
+              <OrderItems items={this.state.order.meals} 
+                          totalPrice={this.props.store.data.order.total_price} 
+                          discount={this.props.store.data.order.multiplier} />
             }/>
-            <OrderField name="adicionais" value=
-            {
-              this.state.order.meals.map(meal => {
-                if(meal.type === 'extra') {
-                return <MealListView key={meal._id}
-                                        id={meal._id}
-                                        name={meal.name} 
-                                        description={meal.description} 
-                                        price={meal.price} 
-                                        url={meal.image_url}
-                                        active={false.toString()}
-                                        addMealToOrder={(mealId, price, active) => this.dummy()}
-                                        />
-              }})
-            }/>
-            {
-              this.props.store.data.order.multiplier > 1?
-              <OrderField name="taxa de aumento" value={Math.round(((this.props.store.data.order.multiplier)*100)-100) + "%"}/>:
-              this.props.store.data.order.multiplier < 1?
-              <OrderField name="taxa de desconto" value={Math.round(100-((this.props.store.data.order.multiplier)*100)) + "%"}/>:
-              <div></div>
-            }
-            <OrderField name="valor total" value={'R$ '+ ((this.props.store.data.order.total_price*this.props.store.data.order.multiplier)/100).toFixed(2)}/>
+            
           </div>
         </div>
 
         <div className="activity__section">
           <h1 className="padded">pagamento</h1>
-          <div className="order-details__payment padded">
+          <div className="order-details__payment padded-x">
           {
             this.state.payments_method.map(payment => {
               return <PaymentBox key={payment.id} 
@@ -227,10 +201,11 @@ export default class Home extends Component {
           }
           </div>
         </div>
+
         {
           this.state.payment_selected !== ""?
           <OrderBar totalPrice={this.props.store.data.order.total_price * this.props.store.data.order.multiplier}
-                    text={"finalizar"}
+                    text={"FECHAR PEDIDO"}
                     continue={(data) => this.createOrder(this.props.store.data.order)} />:
           <Footer p={this.props.history} />
         }

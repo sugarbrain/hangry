@@ -1,0 +1,63 @@
+.order-items {
+
+    &__list {
+        display: flex;
+        flex-flow: column nowrap;
+        border-bottom: 1px solid #ccc;
+        padding: 5px 0px;
+    }
+
+    &__sumup {
+        padding: 10px 5px;
+        
+        .discount {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            font-size: .7rem;
+
+            .rate {
+                font-weight: .7rem;
+            }
+        }
+
+        .total {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            margin-top: 10px;   
+
+            .price {
+                color: #12b312;
+            }
+        }
+
+    }
+
+    &__item {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        padding: 5px;
+        font-size: .8rem;
+        align-items: center;
+
+        .name {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+
+            img {
+                width: 25px;
+                height: 25px;
+                margin-right: 10px;
+                border-radius: 3px;
+            }
+        }
+
+        .price {
+            font-weight: lighter;
+        }
+    }
+}
