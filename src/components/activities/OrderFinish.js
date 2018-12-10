@@ -8,7 +8,7 @@ export default class OrderFinish extends React.Component {
         console.log(this.props.history)
         setTimeout(() => {
             this.props.history.push('/home')
-        }, 2500);
+        }, 3000);
     }
 
     render() {
@@ -19,12 +19,10 @@ export default class OrderFinish extends React.Component {
                 </div>
                 <div className="order-finish__text">
                 {
-                    "Pedido finalizado, com sucesso!"
+                    "Pedido finalizado com sucesso!"
                 }
                 <div className="order-finish__description">
-                    {
-                        "Curiosidade: temos um prato preferido antes mesmo de nascer"
-                    }
+                    Nós te avisaremos quando sua refeição estiver disponível para retirada.
                 </div>
                 </div>
             </div>
